@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h1{
+      color: #cccccc;
+
+    }
+    #host{
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="host">
+    <h1 class="title">i am a title</h1>
+    <p class="subtitle"></p>
+  </div>
+  
+
+  <template id="temp">
+    <style>
+       span {
+            color: red;
+        }
+        ::content * {
+            background-color: #60d9ff;
+        }
+        :host {
+            border: 2px solid #14ff1a;
+        }
+    </style>
+    <p onclick="alert('hello')">点击</p>
+    <span>im the span tag of template</span>
+    <content select=".subtitle"></content>
+    <content select="h1"></content>
+  </template>
+  <script>
+    var host = document.querySelector('#host');
+    var root = host.createShadowRoot();
+    var temp = document.querySelector('#temp')
+    var clone = document.importNode(temp.content, true);
+
+    root.appendChild(clone);
+
+    document.addEventListener('click', e => {
+      console.log(e.target.innerHTML);
+    })
+  </script>
+</body>
+
+</html>
