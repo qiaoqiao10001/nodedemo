@@ -48,10 +48,10 @@ JS：
 博客表
 
 
-| id | title | content | id | title | content |   |
-| - | - | - | - | - | - | - |
-|   |   |   |   |   |   |   |
-|   |   |   |   |   |   |   |
+| id | title | content | createtime | author |
+| - | - | - | - | - |
+| 1 | 1 |   |   |   |
+| 2 | 2 |   |   |   |
 
 用户表
 

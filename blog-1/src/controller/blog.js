@@ -29,14 +29,26 @@ const getDetail = (id) => {
 }
 
 const newBlog = (blogData = {}) => {
+  // blogData是一个博客对象数据，包括title content 属性
   return {
     blogData,
     id: 3
   }
 }
 
+const updateBlog = (id, blogData={}) => {
+  // blogData是一个博客对象数据，包括title content 属性
+  return true;// 更新成功
+}
+
+const deleteBlog = (id) => {
+  return true;
+}
+
 module.exports = {
   getList,
   getDetail,
-  newBlog
+  newBlog,
+  updateBlog,
+  deleteBlog
 }

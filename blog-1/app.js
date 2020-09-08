@@ -35,7 +35,7 @@ const serverHandle = (req, res) => {
   req.path = url.split('?')[0]
   // 解析query放到req上
   req.query = querystring.parse(url.split('?')[1]);
-
+  
   getPostData(req).then(postData => {
     req.body = postData
     const blogData = handleBlogRouter(req, res);
@@ -54,6 +54,11 @@ const serverHandle = (req, res) => {
     res.writeHead(404, { 'Content-Type': 'text/text' })
     res.write('404 not found')
     res.end()
+  }).catch(err => {
+    // https://www.cnblogs.com/codebook/p/10040501.html
+    // 解除node的警告
+    return;
+    console.log( new Error(err));
   })
 }
 
