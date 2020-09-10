@@ -9,9 +9,13 @@ const handleBlogRouter = (req, res) => {
   if (method === 'GET' && req.path === '/api/blog/list') {
     const author = req.query.author || '';
     const keyword = req.query.keyword || '';
-    const listData = getList(keyword, author)
+    // const listData = getList(keyword, author)
 
-    return new SuccessModel(listData)
+    // return new SuccessModel(listData)
+    const result = getList(keyword, author)
+    return result.then(listData => {
+      return new SuccessModel(listData)
+    })
   }
   // 获取博客详情
   if (method === 'GET' && req.path === '/api/blog/detail') {

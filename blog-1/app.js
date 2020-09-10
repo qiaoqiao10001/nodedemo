@@ -35,16 +35,18 @@ const serverHandle = (req, res) => {
   req.path = url.split('?')[0]
   // 解析query放到req上
   req.query = querystring.parse(url.split('?')[1]);
-  
+
   getPostData(req).then(postData => {
     req.body = postData
-    const blogData = handleBlogRouter(req, res);
-    const userData = handleUserRouter(req, res);
-
-    if (blogData) {
-      res.end(JSON.stringify(blogData))
+    const blogResult = handleBlogRouter(req, res);
+    if (blogResult) {
+      blogResult.then(blogData => {
+        res.end(JSON.stringify(blogData))
+      })
       return
     }
+
+    const userData = handleUserRouter(req, res);
 
     if (userData) {
       res.end(JSON.stringify(userData))
@@ -58,7 +60,7 @@ const serverHandle = (req, res) => {
     // https://www.cnblogs.com/codebook/p/10040501.html
     // 解除node的警告
     return;
-    console.log( new Error(err));
+    console.log(new Error(err));
   })
 }
 
