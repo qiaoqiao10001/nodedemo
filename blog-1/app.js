@@ -1,6 +1,7 @@
 const handleBlogRouter = require('./src/router/blog')
 const handleUserRouter = require('./src/router/user')
 const querystring = require('querystring');
+const { log } = require('console');
 
 const getPostData = (req) => {     // 处理post过来的数据
   const promise = new Promise((resolve, reject) => {
@@ -37,6 +38,7 @@ const serverHandle = (req, res) => {
   req.query = querystring.parse(url.split('?')[1]);
 
   getPostData(req).then(postData => {
+    
     req.body = postData
     const blogResult = handleBlogRouter(req, res);
     if (blogResult) {

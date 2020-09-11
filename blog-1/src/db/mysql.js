@@ -16,7 +16,6 @@ function exec(sql){
         return;
       }
       resolve(result)
-
     })
   })
   return promise;
