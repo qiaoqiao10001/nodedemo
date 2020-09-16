@@ -5,6 +5,7 @@ const { log } = require('console');
 
 // session数据 全局的
 const SESSION_DATA = {}
+// 使用redis存储数据
 
 // 获取cookie 的过期时间
 const getCookieExpires = () => {

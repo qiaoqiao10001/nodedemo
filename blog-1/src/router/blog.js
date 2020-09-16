@@ -1,6 +1,16 @@
 const { getList, getDetail, newBlog, updateBlog, deleteBlog } = require('../controller/blog')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 
+// 统一的登录验证函数
+const loginCheck = (req) => {
+  if(!req.session.username){
+   return Promise.resolve(
+     new ErrorModel('尚未登录')
+   )
+  }
+}
+
+
 const handleBlogRouter = (req, res) => {
   const id = req.query.id || '';
   const method = req.method;
@@ -26,6 +36,13 @@ const handleBlogRouter = (req, res) => {
   }
   // 新增一篇博客
   if (method === 'POST' && req.path === '/api/blog/new') {
+    // 更新，删除，都需要验证登录
+    const loginCheckResult = loginCheck(req);
+    if(loginCheckResult){
+      // 有值，有返回，说明未登录
+      return loginCheckResult;
+    }
+
     req.body.author = 'zhansan';
     const result = newBlog(req.body);
     return result.then(data => {

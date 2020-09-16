@@ -18,3 +18,9 @@ var isFunction = isType('Function')
 console.log(
   isString('123')
 );
+
+
+let a = Buffer.alloc(3);
+a.fill('abc');
+console.log(a);
+console.log(0x61);
