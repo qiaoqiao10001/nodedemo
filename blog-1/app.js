@@ -3,6 +3,8 @@ const handleUserRouter = require('./src/router/user')
 const querystring = require('querystring');
 const { log } = require('console');
 
+const { access } = require('./utils/log')
+
 // session数据 全局的
 const SESSION_DATA = {}
 // 使用redis存储数据
@@ -42,6 +44,7 @@ const getPostData = (req) => {     // 处理post过来的数据
 }
 
 const serverHandle = (req, res) => {
+  access(`${req.method} -- ${req.url} -- ${req.headers['user-agent']} -- ${Date.now()}`)
   // 设置json格式返回给前端
   res.setHeader('Content-Type', 'application/json');
   const url = req.url;
